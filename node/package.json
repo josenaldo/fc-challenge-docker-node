@@ -1,0 +1,23 @@
+{
+  "name": "node-nginx-fullcycle",
+  "version": "1.0.0",
+  "main": "index.js",
+  "description": "Aplicação Node.js com MySQL, para o desafio do curso FullCycle",
+  "author": "Josenaldo de Oliveira Matos Filho",
+  "license": "MIT",
+  "repository": {
+    "type": "git",
+    "url": ""
+  },
+  "scripts": {
+    "start": "node index.js"
+  },
+  "dependencies": {
+    "@praveen_prajapati/fakeit": "^1.0.1",
+    "express": "^4.19.1",
+    "mysql": "^2.18.1"
+  },
+  "devDependencies": {
+    "prettier": "^3.2.5"
+  }
+}
