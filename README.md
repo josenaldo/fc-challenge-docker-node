@@ -4,6 +4,7 @@ This is a simple project to solve the challenge of the Fullcycle course. The cha
 
 - [Fullcycle - Docker - Desafio Node.js](#fullcycle---docker---desafio-nodejs)
   - [Pre Requisites](#pre-requisites)
+  - [Fateures](#fateures)
   - [Running the project](#running-the-project)
   - [Contribuiting](#contribuiting)
   - [License](#license)
@@ -15,6 +16,18 @@ To run the project, you need to have the following tools installed:
 
 - Docker
 - Docker Compose
+
+## Fateures
+
+The project has the following features:
+
+- A simple Node.js application that returns the message "Full Cycle Rocks!" in a H1 tag and a list of names from a Mysql database.
+- To each get request, the application will insert a new random name in the database, until the database reaches 20 names.
+- A Mysql database to store the names.
+- A Nginx server acts as a reverse proxy to the Node.js application.
+- A Dockerfile to build the Node.js application image.
+- A Dockerfile to build the Nginx server image.
+- A docker-compose file creates three services: the Node.js application, the Mysql database, and the Nginx server.
 
 ## Running the project
 
