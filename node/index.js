@@ -1,37 +1,38 @@
 const express = require('express')
-const mysql = require('mysql')
-const fake = require('fakeit')
-
 const app = express()
+const fake = require('@praveen_prajapati/fakeit')
+const db = require('./db')
 const port = 3000
-const config = {
-  host: 'db',
-  user: 'root',
-  password: 'root',
-  database: 'nodedb'
-}
 
-app.get('/', (req, res) => {
 
-  const connection = mysql.createConnection(config)
-  const name = `${fake.person.name()} ${fake.person.surName()}` //
-  const insertSql = `INSERT INTO people(name) values('${name}')`
-  const selectSql = `SELECT * FROM people`
+app.get('/', async (req, res) => {
 
-  const rows = connection.query(selectSql)
+  const count = await db.count()
 
-  connection.query(insertSql)
-  connection.end()
+  if (count < 20) {
+    const name = `${fake.person.name()} ${fake.person.surname()}`
+    db.insert(name)
+    console.log(`Inserindo ${name}`)
+  } else {
+    console.log("Já existem 20 registros")
+  }
+
+  const rows = await db.findAll()
+  console.log("rows", rows)
 
   const header = `<h1>Full Cycle Rocks!</h1>`
-  const items = rows.map(row => `<li>${row.id}: ${row.name}</li>`).join('')
-  const peopleList = `<ul>${items}</ul>`
-  const response = header + peopleList
+
+  let response = header
+
+  if (rows) {
+    const items = rows.map(row => `<li>${row.id}: ${row.name}</li>`).join('')
+    const list = `<ul>${items}</ul>`
+    response = response + list
+  }
 
   res.send(response)
 })
 
-
-app.listen(port, () => {
-  console.log(`Example app listening at http://localhost:${port}`)
+app.listen(port, '0.0.0.0', () => {
+  console.log(`Fullcycle app ouvindo na porta http://localhost:${port}`)
 })
